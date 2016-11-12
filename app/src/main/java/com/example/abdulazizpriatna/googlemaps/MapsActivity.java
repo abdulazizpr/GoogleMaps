@@ -45,10 +45,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //untuk rumah makan
     private GoogleMap wdMap;
     private GoogleMap PadangOmuda;
+    private GoogleMap kantinT;
+    private GoogleMap ssg;
+    private GoogleMap martabak;
     private GoogleMap mKontrakan;
 
     private LatLng Wadoel;
+    private LatLng kantintujuh;
     private LatLng PadangO;
+    private LatLng posisiSSG;
+    private  LatLng posisiMartabak;
     private LatLng Kontrakan;
     private LatLng posSekarang;
 
@@ -69,12 +75,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         // cek apakah sudah diijinkan oleh user, jika belum tampilkan dialog
-        if (ActivityCompat.checkSelfPermission (this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission (this,android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED )
         {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST);
             return;
         }
@@ -121,6 +126,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         wdMap = googleMap;
         PadangOmuda = googleMap;
         mKontrakan = googleMap;
+        kantinT = googleMap;
+        ssg = googleMap;
+        martabak = googleMap;
+
         // Add a marker in Sydney and move the camera
         /*LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
@@ -151,6 +160,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //marker Padang Omuda
         PadangO = new LatLng(-6.8658617,107.5916296);
         PadangOmuda.addMarker(new MarkerOptions().position(PadangO).title("Rumah Makan Padang Omuda"));
+
+        //marker kantin 77
+        kantintujuh = new LatLng(-6.863624,107.589367);
+        kantinT.addMarker(new MarkerOptions().position(kantintujuh).title("Kantin 77"));
+
+        //marker SSG
+        posisiSSG = new LatLng(-6.8637613,107.5898821);
+        ssg.addMarker(new MarkerOptions().position(posisiSSG).title("SSGC"));
+
+        //marker martabak
+        posisiMartabak = new LatLng(-6.864408,107.5921445);
+        martabak.addMarker(new MarkerOptions().position(posisiMartabak).title("Martabak lezat Group Bandung"));
 
 
         // Set kamera sesuai batas UPI
@@ -242,6 +263,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }*/
         double toKontrakan = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(Kontrakan),getLong(Kontrakan));
         double toPadangO = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(PadangO),getLong(PadangO));
+        double toKantin = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(kantintujuh),getLong(kantintujuh));
+        double toSSG = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(posisiSSG),getLong(posisiSSG));
+        double toMartabak = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(posisiMartabak),getLong(posisiMartabak));
+
         System.out.println("Jarak : " + toKontrakan);
         if(toKontrakan >= 0 && toKontrakan <=12){
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -262,13 +287,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             System.out.println("Jarak : " + toPadangO);
             mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
             AlertDialog ad = new AlertDialog.Builder(this).create();
-            ad.setMessage("Anda dekat lokasi rumah padang");
+            ad.setMessage("Anda dekat lokasi Rumah Makan Padang Omuda");
             ad.show();
         }
 
+        if(toKantin >= 0 && toKantin <=12){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 400 milliseconds
+            v.vibrate(400);
+            System.out.println("Jarak : " + toKantin);
+            mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
+            AlertDialog ad = new AlertDialog.Builder(this).create();
+            ad.setMessage("Anda dekat lokasi Kantin 77");
+            ad.show();
+        }
 
+        if(toSSG >= 0 && toSSG <=12){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 400 milliseconds
+            v.vibrate(400);
+            System.out.println("Jarak : " + toSSG);
+            mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
+            AlertDialog ad = new AlertDialog.Builder(this).create();
+            ad.setMessage("Anda dekat lokasi Kantin 77");
+            ad.show();
+        }
 
-
+        if(toMartabak >= 0 && toMartabak <=12){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 400 milliseconds
+            v.vibrate(400);
+            System.out.println("Jarak : " + toMartabak);
+            mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
+            AlertDialog ad = new AlertDialog.Builder(this).create();
+            ad.setMessage("Anda dekat lokasi Kantin 77");
+            ad.show();
+        }
     }
 
     public static float distFrom(float lat1, float lng1, float lat2, float lng2) {
