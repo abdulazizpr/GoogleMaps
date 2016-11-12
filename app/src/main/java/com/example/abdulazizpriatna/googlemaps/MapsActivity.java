@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -160,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //posisi sekarang
         posSekarang = new LatLng(-6.8663673, 107.5918008);
 
-        mPosSekarang = mMap.addMarker(new MarkerOptions().position(posSekarang).title("PosSekarang"));
+        mPosSekarang = mMap.addMarker(new MarkerOptions().position(posSekarang).title("PosSekarang").flat(true));
 
         //set kamera sesuai batas di Ilkom
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posSekarang, 17));
@@ -219,7 +220,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ad.setMessage("update lokasi");
         ad.show();*/
         // Get instance of Vibrator from current Context
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 17));
 
@@ -243,7 +244,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double toPadangO = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(PadangO),getLong(PadangO));
         System.out.println("Jarak : " + toKontrakan);
         if(toKontrakan >= 0 && toKontrakan <=12){
-
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 400 milliseconds
             v.vibrate(400);
 
@@ -255,7 +256,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if(toPadangO >= 0 && toPadangO <=12){
-
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 400 milliseconds
             v.vibrate(400);
             System.out.println("Jarak : " + toPadangO);
