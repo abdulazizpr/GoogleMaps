@@ -1,7 +1,10 @@
 package com.example.abdulazizpriatna.googlemaps;
 
+import android.app.Notification;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Vibrator;
 import android.renderscript.Double2;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
@@ -215,6 +218,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         /*AlertDialog ad = new AlertDialog.Builder(this).create();
         ad.setMessage("update lokasi");
         ad.show();*/
+        // Get instance of Vibrator from current Context
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 17));
 
@@ -238,6 +243,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double toPadangO = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(PadangO),getLong(PadangO));
         System.out.println("Jarak : " + toKontrakan);
         if(toKontrakan >= 0 && toKontrakan <=12){
+
+            // Vibrate for 400 milliseconds
+            v.vibrate(400);
+
             System.out.println("Jarak : " + toKontrakan);
             mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
             AlertDialog ad = new AlertDialog.Builder(this).create();
@@ -246,6 +255,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if(toPadangO >= 0 && toPadangO <=12){
+
+            // Vibrate for 400 milliseconds
+            v.vibrate(400);
             System.out.println("Jarak : " + toPadangO);
             mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
             AlertDialog ad = new AlertDialog.Builder(this).create();
