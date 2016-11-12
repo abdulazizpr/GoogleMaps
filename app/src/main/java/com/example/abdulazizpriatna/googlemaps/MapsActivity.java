@@ -237,7 +237,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double toKontrakan = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(Kontrakan),getLong(Kontrakan));
         double toPadangO = distFrom((float)location.getLatitude(),(float)location.getLongitude(),getLat(PadangO),getLong(PadangO));
         System.out.println("Jarak : " + toKontrakan);
-        if(toKontrakan >= 0 && toKontrakan <=15){
+        if(toKontrakan >= 0 && toKontrakan <=12){
             System.out.println("Jarak : " + toKontrakan);
             mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
             AlertDialog ad = new AlertDialog.Builder(this).create();
@@ -245,7 +245,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ad.show();
         }
 
-        if(toPadangO >= 0 && toPadangO <=15){
+        if(toPadangO >= 0 && toPadangO <=12){
             System.out.println("Jarak : " + toPadangO);
             mPosSekarang.setPosition(new LatLng(location.getLatitude(),location.getLongitude()));
             AlertDialog ad = new AlertDialog.Builder(this).create();
